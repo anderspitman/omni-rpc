@@ -1,6 +1,6 @@
 {
   "name": "omni-rpc",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/anderspitman/omni-rpc-js/issues"
   },
-  "homepage": "https://github.com/anderspitman/omni-rpc-js#readme"
+  "homepage": "https://github.com/anderspitman/omni-rpc-js#readme",
+  "dependencies": {
+    "omnistreams": "^0.6.0"
+  }
 }
