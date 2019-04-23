@@ -1,7 +1,7 @@
 import {
   Multiplexer,
   initiateWebSocketMux,
-} from './node_modules/omnistreams-concurrent/src/index.mjs';
+} from './node_modules/omnistreams/index.mjs';
 
 
 class Peer {
