@@ -1,0 +1,22 @@
+{
+  "name": "omni-rpc",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anderspitman/omni-rpc-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anderspitman/omni-rpc-js/issues"
+  },
+  "homepage": "https://github.com/anderspitman/omni-rpc-js#readme"
+}
