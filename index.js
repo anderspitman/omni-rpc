@@ -72,6 +72,12 @@ class Peer {
   }
 
   _handleMessageResponse(response) {
+    if (response.result !== undefined) {
+      this._requests[response.id].resolve(response.result);
+    }
+    else {
+      this._requests[response.id].reject();
+    }
     delete this._requests[response.id];
   }
 
@@ -98,6 +104,7 @@ class Peer {
     else {
       this._requests[meta.id].reject(meta.result);
     }
+    delete this._requests[response.id];
   }
 
   implement(method, callback) {
