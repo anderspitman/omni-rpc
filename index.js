@@ -99,12 +99,12 @@ class Peer {
 
   _handleStreamResponse(meta, producer) {
     if (meta.result !== undefined) {
-      this._requests[meta.id].resolve({ result: meta, producer });
+      this._requests[meta.id].resolve({ result: meta.result, producer });
     }
     else {
       this._requests[meta.id].reject(meta.result);
     }
-    delete this._requests[response.id];
+    delete this._requests[meta.id];
   }
 
   implement(method, callback) {
