@@ -18,11 +18,11 @@ class Peer {
 
       const message = decodeObject(rawMessage)
 
-      if (message.result !== undefined) {
-        this._handleMessageResponse(message);
+      if (message.result === undefined && message.error === undefined) {
+        this._handleMessageRequest(message);
       }
       else {
-        this._handleMessageRequest(message);
+        this._handleMessageResponse(message);
       }
     });
 
@@ -49,11 +49,20 @@ class Peer {
 
     if (this._methods[method] !== undefined) {
       const result = await this._methods[method](params);
-      this._mux.sendControlMessage(encodeObject({
+
+      const message = {
         jsonrpc: '2.0',
         id,
-        result,
-      }));
+      };
+
+      if (result.error !== undefined) {
+        message.error = result.error;
+      }
+      else {
+        message.result = result.response;
+      }
+
+      this._mux.sendControlMessage(encodeObject(message));
     }
     else if (this._receiveMethods[method] !== undefined) {
 
@@ -76,7 +85,7 @@ class Peer {
       this._requests[response.id].resolve(response.result);
     }
     else {
-      this._requests[response.id].reject();
+      this._requests[response.id].reject(response.error);
     }
     delete this._requests[response.id];
   }
