@@ -1,4 +1,9 @@
-import { encodeObject, decodeObject, initiateWebSocketMux } from 'omnistreams';
+import {
+  encodeObject,
+  decodeObject,
+  initiateWebSocketMux,
+  MapConduit,
+} from 'omnistreams';
 
 
 class Peer {
@@ -30,11 +35,14 @@ class Peer {
 
       const meta = decodeObject(rawMeta)
 
+      const decodeConduit = new MapConduit(decodeObject);
+      producer.pipe(decodeConduit);
+
       if (meta.result !== undefined) {
-        this._handleStreamResponse(meta, producer);
+        this._handleStreamResponse(meta, decodeConduit);
       }
       else {
-        this._handleStreamRequest(meta, producer);
+        this._handleStreamRequest(meta, decodeConduit);
       }
 
       delete this._requests[meta.id];
